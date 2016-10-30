@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Obtener coordenadas de un marcador </title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+      #coords{width: 500px;}
+    </style>
+  </head>
+  <body >
+    <div id="map"></div>
+
+    <script>
+
+
+var marker;          //variable del marcador
+var coords = {};    //coordenadas obtenidas con la geolocalización
+
+//Funcion principal
+initMap = function () 
+{
+
+    //usamos la API para geolocalizar el usuario
+        navigator.geolocation.getCurrentPosition(
+          function (position){
+            coords =  {
+              lng: position.coords.longitude,
+              lat: position.coords.latitude
+            };
+               //var acopio = new google.maps.LatLng(9.9372172,-84.0492243);
+
+                
+            setMapa(coords);  //pasamos las coordenadas al metodo para crear el mapa
+           
+          },function(error){console.log(error);});
+    
+}
+
+
+
+function setMapa (coords)
+{   
+      //Se crea una nueva instancia del objeto mapa
+      var map = new google.maps.Map(document.getElementById('map'),
+      {
+        zoom: 13,
+        center:new google.maps.LatLng(coords.lat,coords.lng),
+
+      });
+
+      //Creamos el marcador en el mapa con sus propiedades
+      //para nuestro objetivo tenemos que poner el atributo draggable en true
+      //position pondremos las mismas coordenas que obtuvimos en la geolocalización
+      marker = new google.maps.Marker({
+        map: map,
+        draggable: false,
+        animation: google.maps.Animation.DROP,
+        position: new google.maps.LatLng(coords.lat,coords.lng),
+          
+      });
+      //agregamos un evento al marcador junto con la funcion callback al igual que el evento dragend que indica 
+      //cuando el usuario a soltado el marcador
+      marker.addListener('click', toggleBounce);
+      
+      marker.addListener( 'dragend', function (event)
+      {
+        //escribimos las coordenadas de la posicion actual del marcador dentro del input #coords
+        document.getElementById("coords").value = this.getPosition().lat()+","+ this.getPosition().lng();
+      });
+    
+    //creando un marcador con cada centro de Acopio
+    //variable con coordenadas
+        var acopio = new google.maps.LatLng(9.9372172,-84.0492243);
+    //agregar texto al marcador
+          var info = 'Recicladora Capri';
+             var infowindow = new google.maps.InfoWindow({
+                content: info
+                });
+        //creando marcador
+        var centro = new google.maps.Marker({
+        position: acopio,
+        map: map,
+        title: 'Hello World!'
+        });
+    //indicacion para mostrar mensaje
+        centro.addListener('click', function() {
+        infowindow.open(map, centro);
+        });
+
+
+    //creando un marcador con cada centro de Acopio
+    //variable con coordenadas
+        var acopio2 = new google.maps.LatLng(9.9372154,-84.0820553);
+    //agregar texto al marcador
+            var info2 = 'Recicladora La Calma';
+             var infowindow2 = new google.maps.InfoWindow({
+                content: info2
+                });
+    //creando marcador
+        var centro2 = new google.maps.Marker({
+        position: acopio2,
+        map: map,
+        title: 'Hello World!'
+        });
+    //indicacion para mostrar mensaje
+        centro2.addListener('click', function() {
+        infowindow2.open(map, centro2);
+        });
+
+        
+         //creando un marcador con cada centro de Acopio
+    //variable con coordenadas
+        var acopio3 = new google.maps.LatLng(9.96752,-84.0038127);
+    //agregar texto al marcador
+            var info3 = 'Bosque Plástico S.A.';
+             var infowindow3 = new google.maps.InfoWindow({
+                content: info3
+                });
+    //creando marcador
+        var centro3 = new google.maps.Marker({
+        position: acopio3,
+        map: map,
+        title: 'Hello World!'
+        });
+    //indicacion para mostrar mensaje
+        centro3.addListener('click', function() {
+        infowindow3.open(map, centro3);
+        });
+    
+         //creando un marcador con cada centro de Acopio
+    //variable con coordenadas
+        var acopio4 = new google.maps.LatLng(9.9473071,-84.1937655);
+    //agregar texto al marcador
+            var info4 = 'Servicios Ecológicos';
+             var infowindow4 = new google.maps.InfoWindow({
+                content: info4
+                });
+    //creando marcador
+        var centro4 = new google.maps.Marker({
+        position: acopio4,
+        map: map,
+        title: 'Hello World!'
+        });
+    //indicacion para mostrar mensaje
+        centro4.addListener('click', function() {
+        infowindow4.open(map, centro4);
+        });
+    
+     //creando un marcador con cada centro de Acopio
+    //variable con coordenadas
+        var acopio5 = new google.maps.LatLng(9.9188207,-84.1070956);
+    //agregar texto al marcador
+            var info5 = 'Centro de Reciclaje Municipalidad de San Jose';
+             var infowindow5 = new google.maps.InfoWindow({
+                content: info5
+                });
+    //creando marcador
+        var centro5 = new google.maps.Marker({
+        position: acopio5,
+        map: map,
+        title: 'Hello World!'
+        });
+    //indicacion para mostrar mensaje
+        centro5.addListener('click', function() {
+        infowindow5.open(map, centro5);
+        });
+    
+    
+    //creando un marcador con cada centro de Acopio
+    //variable con coordenadas
+        var acopio6 = new google.maps.LatLng(10.0141057,-84.1022785);
+    //agregar texto al marcador
+            var info6 = 'Municipalidad de San Rafael, Provincia de Heredia, San Rafael, Costa Rica';
+             var infowindow6 = new google.maps.InfoWindow({
+                content: info6
+                });
+    //creando marcador
+        var centro6 = new google.maps.Marker({
+        position: acopio6,
+        map: map,
+        title: 'Hello World!'
+        });
+    //indicacion para mostrar mensaje
+        centro6.addListener('click', function() {
+        infowindow6.open(map, centro6);
+        });
+    
+            //creando un marcador con cada centro de Acopio
+    //variable con coordenadas
+        var acopio7 = new google.maps.LatLng(9.9160596,-84.083975);
+    //agregar texto al marcador
+            var info7 = 'ZUBRE LTA';
+             var infowindow7 = new google.maps.InfoWindow({
+                content: info7
+                });
+    //creando marcador
+        var centro7 = new google.maps.Marker({
+        position: acopio7,
+        map: map,
+        title: 'Hello World!'
+        });
+    //indicacion para mostrar mensaje
+        centro7.addListener('click', function() {
+        infowindow7.open(map, centro7);
+        });
+    
+    
+    //creando un marcador con cada centro de Acopio
+    //variable con coordenadas
+        var acopio8 = new google.maps.LatLng(9.937433,-84.0645487);
+    //agregar texto al marcador
+            var info8 = 'Gestión de Residuos Peligrosos | Wastech Costa Rica';
+             var infowindow8 = new google.maps.InfoWindow({
+                content: info8
+                });
+    //creando marcador
+        var centro8 = new google.maps.Marker({
+        position: acopio8,
+        map: map,
+        title: 'Hello World!'
+        });
+    //indicacion para mostrar mensaje
+        centro8.addListener('click', function() {
+        infowindow8.open(map, centro8);
+        });
+    
+    //creando un marcador con cada centro de Acopio
+    //variable con coordenadas
+        var acopio9 = new google.maps.LatLng(9.840759,-83.9551997);
+    //agregar texto al marcador
+            var info9 = 'GEEP COSTA RICA';
+             var infowindow9 = new google.maps.InfoWindow({
+                content: info9
+                });
+    //creando marcador
+        var centro9 = new google.maps.Marker({
+        position: acopio9,
+        map: map,
+        title: 'Hello World!'
+        });
+    //indicacion para mostrar mensaje
+        centro9.addListener('click', function() {
+        infowindow9.open(map, centro9);
+        });
+    
+        //creacion de ruta
+      var directionsDisplay = new google.maps.DirectionsRenderer({
+          map: map
+        });
+
+        // Set destination, origin and travel mode.
+        var request = {
+          destination: acopio,
+          origin: new google.maps.LatLng(coords.lat,coords.lng),
+          travelMode: 'DRIVING'
+        };
+
+        // Pass the directions request to the directions service.
+        var directionsService = new google.maps.DirectionsService();
+        directionsService.route(request, function(response, status) {
+          if (status == 'OK') {
+            // Display the route on the map.
+            directionsDisplay.setDirections(response);
+          }
+        });
+ }
+
+
+
+//callback al hacer clic en el marcador lo que hace es quitar y poner la animacion BOUNCE
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+    
+
+// Carga de la libreria de google maps 
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+  </body>
+</html>
