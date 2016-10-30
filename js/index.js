@@ -45,7 +45,7 @@ var app = {
                 }, function errorFn(error) {
                     alert('Loading AR web view failed: ' + error);
                 },
-                cordova.file.dataDirectory + 'www/pgday/index.html', [ '2d_tracking' ], { camera_position: 'back' }
+                cordova.file.dataDirectory + 'pgday/index.html', [ '2d_tracking' ], { camera_position: 'back' }
             );
         }, function(errorMessage) {
             alert(errorMessage);
